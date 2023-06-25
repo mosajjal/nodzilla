@@ -1,0 +1,38 @@
+api:
+  # listen specifies the host and port to listen to
+  listen: "127.0.0.1:3000"
+  # base_path for API functions. useful when the API is being served
+  # behind a reverse proxy under a different path
+  base_path_api: "/"
+  # base_path for Admin functions. That includes flushing cache, adding a list of domains to the db
+  # and reloading the database
+  base_path_admin: "/admin"
+  # enable TLS (you'll need to provide certificate and key)
+  tls_enabled: false
+  tls_cert: ""
+  tls_key: ""
+  # set the authentication scheme. "none" and "plain" are currently supported
+  # best practice is to expose this API through an app proxy or API Gateway 
+  # providing the authentication and rate limit functions
+  # note that if either one of the auth methods is not "none", a username and password
+  # must be provided for ALL APIs. in those cases, the username and password gets validated
+  # against the API paths that have a plain settings, and will be ignored for the "none" 
+  # auth methods.
+  auth_method_api: "none"
+  auth_users_api:
+    "username1": "password1"
+    "username2": "password2"
+  auth_method_admin: "plain"
+  auth_users_admin:
+    "username1": "password1"
+    "username2": "password2"
+
+  # rps sets the default requests per second per IP. 0 disables it
+  rps: 1000
+
+db:
+  # Database engine used to store Newly Observed Domains. currently only Pebble is supported
+  engine: "pebble"
+  # absolute path to a directory pointing to the database path
+  uri: /tmp/nodzilla/db
+
